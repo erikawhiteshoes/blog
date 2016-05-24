@@ -11,10 +11,36 @@ var imagemin       = require('gulp-imagemin');
 var markdown       = require('gulp-markdown');
 var frontMatter    = require('gulp-front-matter');
 var bSync          = require('browser-sync');
+var through2       = require('through2');
 var reload         = bSync.reload;
+
+var site = {
+  title: "Erika's awesome blab spot"
+};
+
+var collectPosts = function() {
+  var posts = [];
+
+  return through2.obj(function(file, enc, next) {
+    var post = file.page;
+    post.body = file.contents.toString();
+    post.summary = summarize(post.body);
+    posts.push(post);
+    this.push(file);
+    next();
+  }, function(done) {
+    site.posts = posts;
+    done();
+  });
+};
+
+var summarize = function(html) {
+  return html.split("<!--more-->")[0];
+};
 
 gulp.task('pages', function() {
   return gulp.src('src/pages/**/*.html')
+             .pipe(data({site: site}))
              .pipe(nunjucksRender({
                path: ['src/templates']
              }))
@@ -48,7 +74,9 @@ gulp.task('styles', function() {
 gulp.task('posts', function() {
   return gulp.src('src/posts/**/*.md')
              .pipe(frontMatter({property: 'page', remove: true}))
+             .pipe(data({site: site}))
              .pipe(markdown())
+             .pipe(collectPosts())
              .pipe(gulp.dest('dist/blog'))
              .pipe(reload({stream: true}));
 });

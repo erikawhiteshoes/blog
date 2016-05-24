@@ -16,6 +16,23 @@
   <div class="row">
     <div class="col-md-12">
       <h3>Recent posts</h3>
+      {{ site }}
+      {% for post in site.posts %}
+      <div class="article">
+        <h2 class="page-heading">{{ post.title }}</h2>
+        <div class="meta">
+          Posted by {{ post.author }}
+        </div>
+
+        <div class="article-summary">
+          {{ post.summary | safe }}
+
+          <a href="{{ post.permalink }}">read more...</a>
+        </div>
+      </div>
+      <hr>
+      
+      {% endfor %}
     </div>
   </div>
 </div>
