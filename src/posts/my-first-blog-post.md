@@ -1,16 +1,12 @@
 ---
 author: Erika
-title: My first blog post
-date: 2016/04/20
+title: The changeing scope of the Bay Area 
+date: 2016/05/20
 permalink: /blog/my-first-blog-post.html
 ---
 
-Lorem quam sit animi vitae commodi. Ut quidem vitae accusamus recusandae modi nulla libero. Est reprehenderit necessitatibus iste omnis sit laborum. Vel inventore quae corrupti saepe ab neque iste. Animi!
-
-Consectetur enim cupiditate doloremque voluptates necessitatibus error cupiditate amet incidunt. Eligendi sit velit fugit error quam modi! Nobis ad sint ullam sed natus cumque. Enim possimus tempora dolorum aliquam dolore!
+If it were not for a kind landlord we never would have been able to afford housing in the Bay Area.  Rental prices in our "up-and-coming" community have doubled since we moved in 2008.  A two-bedroom apartment is, generally, $2800.  Artists, musicians and "the middle class" are moving farther and farther away in hopes to be able to afford their families or keep a creative lifestyle.We are a society that compares themselves to what others have (and not so much of what others don't have) constantly.  The tech industry has infiltrated the culture of San Francisco.  Businesses are catering to that community allowing property owners to raise rents so smaller businesses are priced out of the market. Each time I re-vist a former neighborhood there are more high-end apt. buildings and $4 toast.
 
 <!--more-->
 
-## And then for something completely different!
-
-Amet officiis mollitia nulla officia expedita, voluptatibus earum eaque possimus! Omnis neque nobis voluptatibus at amet, quaerat sint cum quo sit nisi! Ut modi totam debitis illo voluptatem, nam non.
+Although, rents are ridiculous, my salary isn't reflecting the change, it is not a horrible life here by any means.  There are so many arts organizations thriving and still long-term residents keeping a little bit of the SF charm.  There is a lot of inexpensive and very good food.  Great produce, liberal-minded people, some who actually care about what is going on in the world at a deeper level.  However, the affordability does make one evaluate the factors that make their community livable.   
