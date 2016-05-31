@@ -1,22 +1,11 @@
 {% extends 'page.html' %}
 
 {% block content %}
-<div class="header">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
+<div class="header row col-md-12 container">
         <h1>My Heart and I are leaving San Francisco</h1>
-        <p><b>This summer two car-hating dogs and two humans traverse the continent to make a new home on the east coast.  This is our story.</b></p>
-      </div>
-    </div>
-  </div>
 </div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h3>Recent posts</h3>
-      {{ site }}
+<div>
+  <h3>Recent posts</h3>
       {% for post in site.posts %}
       <div class="article">
         <h2 class="page-heading">{{ post.title }}</h2>
@@ -31,7 +20,6 @@
         </div>
       </div>
       <hr>
-      
       {% endfor %}
     </div>
   </div>

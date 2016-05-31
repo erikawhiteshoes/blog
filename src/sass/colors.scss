@@ -1,14 +1,25 @@
 .header {
-  background: url(/img/roadheader.png) no-repeat 10% 10%;
-  color: #DEEFF0;
-  font-family: 'Khula', sans-serif;
-  text-shadow: 1.2px 1.2px rgba(46,85,106,1);
+  background: url(../img/roadheader.png) no-repeat 10% 10%;
+  height: 450px;
+  margin-bottom: 2em;
+  h1{
+    color: #F7F6F1;
+    position: absolute;
+    bottom: -4px;
+    right: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    text-shadow: 1.5px 1.5px #434742;
+  }
+}
+.navbar-default {
+  background-color: #CFD6D1;
 }
 
-.navbar-default {
-  background-color: rgb(239, 227, 213);
+  h2 {
+    margin-top: 45px;
 }
 
 body {
-  background-color: rgb(207, 214, 209);
+  background-color: #CFD6D1;
 }

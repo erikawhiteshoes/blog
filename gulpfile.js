@@ -1,5 +1,7 @@
+(function(){
+  var self = this;
 var gulp           = require('gulp');
-//var plugins      = require('gulp-load-plugins');
+var plugins      = require('gulp-load-plugins')();
 var data           = require('gulp-data');
 var sequence       = require('gulp-sequence');
 var sass           = require('gulp-sass');
@@ -15,7 +17,8 @@ var through2       = require('through2');
 var reload         = bSync.reload;
 
 var site = {
-  title: "Erika's awesome blab spot"
+  title: "Erika's awesome blab spot",
+  root: "/"
 };
 
 var collectPosts = function() {
@@ -95,6 +98,12 @@ gulp.task('content', function(cb) {
   return sequence('posts', 'pages', cb);
 });
 
+gulp.task('deploy', function() {
+self.site.root = '/blog/';
+return gulp.src('./dist/**/*')
+.pipe(plugins.ghPages());
+});
+
 gulp.task('watch', function() {
   gulp.watch('src/js/**/*.js',      [ 'scripts']);
   gulp.watch('src/sass/**/*.scss',  [ 'styles']);
@@ -104,3 +113,4 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', sequence(['assets', 'content'], 'serve', 'watch'));
+})();
