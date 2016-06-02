@@ -4,8 +4,10 @@
 <div class="header row col-md-12 container">
         <h1>My Heart and I are leaving San Francisco</h1>
 </div>
-<div>
-  <h3>Recent posts</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h3>Recent posts</h3>
       {% for post in site.posts %}
       <div class="article">
         <h2 class="page-heading">{{ post.title }}</h2>
@@ -21,6 +23,9 @@
       </div>
       <hr>
       {% endfor %}
+    </div>
+    <div class="col-md-3">
+      <h3>sidebar</h3>
     </div>
   </div>
 </div>
