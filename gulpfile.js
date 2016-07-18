@@ -1,7 +1,7 @@
 (function(){
   var self = this;
   var gulp           = require('gulp');
-  var plugins      = require('gulp-load-plugins')();
+  var plugins        = require('gulp-load-plugins')();
   var data           = require('gulp-data');
   var sequence       = require('gulp-sequence');
   var sass           = require('gulp-sass');
@@ -24,21 +24,24 @@
     root: "/"
   };
 
-  var collectPosts = function() {
-    var posts = [];
 
-    return through2.obj(function(file, enc, next) {
-      var post = file.page;
-      post.body = file.contents.toString();
-      post.summary = summarize(post.body);
-      posts.push(post);
-      this.push(file);
-      next();
-    }, function(done) {
+    var collectPosts = function() {
+      var posts = [];
+
+      return through2.obj(function(file, enc, next) {
+        var post = file.page;
+        var filename = file.relative.split(".")[0];
+        post.body = file.contents.toString();
+        post.image = filename + ".img";  // call function here something based on file
+        post.summary = summarize(post.body);
+        posts.push(post);
+        this.push(file);
+        next();
+      }, function(done) {
       site.posts = posts;
       done();
-    });
-  };
+      });
+    };
 
   var summarize = function(html) {
     return html.split("<!--more-->")[0];
