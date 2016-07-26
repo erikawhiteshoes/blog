@@ -2,18 +2,6 @@
   var self = this;
   var gulp           = require('gulp');
   var plugins        = require('gulp-load-plugins')();
-  var data           = require('gulp-data');
-  var sequence       = require('gulp-sequence');
-  var sass           = require('gulp-sass');
-  var concat         = require('gulp-concat');
-  var uglify         = require('gulp-uglify');
-  var nunjucksRender = require('gulp-nunjucks-render');
-  var nunjucks       = require('gulp-nunjucks');
-  var htmlmin        = require('gulp-htmlmin');
-  var imagemin       = require('gulp-imagemin');
-  var markdown       = require('gulp-markdown');
-  var frontMatter    = require('gulp-front-matter');
-  var wrap           = require('gulp-wrap');
   var bSync          = require('browser-sync');
   var through2       = require('through2');
   var fs             = require('fs');
@@ -49,22 +37,22 @@
 
   gulp.task('pages', function() {
     return gulp.src('src/pages/**/*.html')
-              .pipe(data({site: site}))
-              .pipe(nunjucksRender({
+              .pipe(plugins.data({site: site}))
+              .pipe(plugins.nunjucksRender({
                 path: ['src/templates']
               }))
-              .pipe(htmlmin({collapseWhitespace: true}))
+              .pipe(plugins.htmlmin({collapseWhitespace: true}))
               .pipe(gulp.dest('dist'))
               .pipe(reload({stream: true}));
   });
 
   gulp.task('posts', function() {
     return gulp.src('src/posts/**/*.md')
-               .pipe(frontMatter({property: 'page', remove: true}))
-               .pipe(data({site: site}))
-               .pipe(markdown())
+               .pipe(plugins.frontMatter({property: 'page', remove: true}))
+               .pipe(plugins.data({site: site}))
+               .pipe(plugins.markdown())
                .pipe(collectPosts())
-               .pipe(wrap(function(data) {
+               .pipe(plugins.wrap(function(data) {
                  return fs.readFileSync("src/templates/post.html").toString();
                }, null, {engine: 'nunjucks'}))
                .pipe(gulp.dest('dist/blog'))
@@ -72,23 +60,28 @@
   });
 
   gulp.task('images', function() {
-    return gulp.src('src/img/*')
-              .pipe(imagemin())
+    return gulp.src('src/img/**/*')
+              .pipe(plugins.imagemin())
               .pipe(gulp.dest('dist/img'))
               .pipe(reload({stream: true}));
   });
 
+  gulp.task('static', function() {
+    return gulp.src('src/static/**/*')
+              .pipe(gulp.dest('dist'));
+  });
+
   gulp.task('scripts', function() {
     return gulp.src('src/js/*')
-              .pipe(uglify())
+              .pipe(plugins.uglify())
               .pipe(gulp.dest('dist/js'))
               .pipe(reload({stream: true}));
   });
 
   gulp.task('styles', function() {
     return gulp.src('src/sass/**/*.scss')
-              .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-              .pipe(concat('all.min.css'))
+              .pipe(plugins.sass({outputStyle: 'compressed'}).on('error', plugins.sass.logError))
+              .pipe(plugins.concat('all.min.css'))
               .pipe(gulp.dest('dist/css'))
               .pipe(reload({stream: true}));
   });
@@ -98,19 +91,18 @@
   });
 
   gulp.task('serve', function(cb) {
-    return sequence('sync', cb);
+    return plugins.sequence('sync', cb);
   });
 
   gulp.task('assets', ['images', 'styles', 'scripts']);
 
   gulp.task('content', function(cb) {
-    return sequence('posts', 'pages', cb);
+    return plugins.sequence('static', 'posts', 'pages', cb);
   });
 
   gulp.task('deploy', function() {
-    self.site.root = '/blog/';
     return gulp.src('./dist/**/*')
-               .pipe(plugins.ghPages());
+               .pipe(plugins.ghPages({}));
   });
 
   gulp.task('watch', function() {
@@ -122,5 +114,5 @@
     gulp.watch('src/templates/**/*.html', [ 'content']);
   });
 
-  gulp.task('default', sequence(['assets', 'content'], 'serve', 'watch'));
+  gulp.task('default', plugins.sequence(['assets', 'content'], 'serve', 'watch'));
 })();
