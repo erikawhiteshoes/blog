@@ -27,6 +27,7 @@
     "gulp-sequence": "^0.4.5",
     "gulp-uglify": "^1.5.3",
     "gulp-wrap": "^0.13.0",
+    "strftime": "^0.9.2",
     "vinyl-fs": "^2.4.3",
     "vinyl-named-with-path": "^1.0.0",
     "vinyl-transform": "^1.0.0"

@@ -1,6 +1,7 @@
 (function(){
   var self = this;
   var gulp           = require('gulp');
+  var strftime       = require('strftime');
   var plugins        = require('gulp-load-plugins')();
   var bSync          = require('browser-sync');
   var through2       = require('through2');
@@ -12,15 +13,21 @@
     root: "/"
   };
 
+var toTitle = function(path) {
+  var title =  path.split(".html")[0]
+                     .replace(/-/g, ' ')
+                     .replace(/   /, ' - ');
+  return title[0].toUpperCase() + title.slice(1, title.length);
+};
 
     var collectPosts = function() {
       var posts = [];
 
       return through2.obj(function(file, enc, next) {
         var post = file.page;
-        var filename = file.relative.split(".")[0];
+        post.title = toTitle(file.relative);
+        post.publishedOn = strftime('%B %d, %Y', Date.parse(file.page.publishedOn));
         post.body = file.contents.toString();
-        post.image = filename + ".img";  // call function here something based on file
         post.summary = summarize(post.body);
         posts.push(post);
         this.push(file);
